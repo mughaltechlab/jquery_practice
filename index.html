@@ -57,6 +57,20 @@
         <button class="nBtn">No</button>
     </div>
 
+    <div>
+        <form action="" id="assignment">
+            <div>
+                <input style="margin-block: 8px;" type="text" name="in" id="in" >
+                <span id="err"></span>
+            </div>
+            <button type="submit">ADD</button>
+        </form>
+        <p id="para"></p>
+        <div class="sticker"></div>
+    </div>
+
+
+
     <script>
         $(document).ready(()=>{
             $("#addForm").submit((e)=>{
@@ -165,6 +179,40 @@
             // $('h2').mouseleave(()=>{
             //     $('h2').css('color','black');
             // });
+
+
+            /**
+             * todo: ASSIGNMENT
+            */
+           $("#assignment").submit((e)=>{
+            e.preventDefault();
+            if ($('#in').val() <= 0 || $('#in').val() == '' || isNaN($('#in').val()) ) {
+                
+                $('#in').css({"border":"1px solid tomato", "outline":"1px solid red"});
+                $("#err")
+                .html("* You can only put value greater that 0")
+                .css({"color":"tomato"});
+                // <div style="width:100%;height:0;padding-bottom:54%;position:relative;"><iframe src="https://giphy.com/embed/uqSU9IEYEKAbS" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/angry-fight-family-guy-uqSU9IEYEKAbS">via GIPHY</a></p>
+                $('.sticker').html(`<div style="width:30%;height:0;padding-bottom:10%;position:relative;"><iframe src="https://giphy.com/embed/uqSU9IEYEKAbS" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/angry-fight-family-guy-uqSU9IEYEKAbS">via GIPHY</a></p>`);
+                
+            }else{
+                $('#in').css({"border":"1px solid green", "outline":"1px solid green"});
+                cash = $('#in').val() * 2;
+                $("#err")
+                .html("✔")
+                .css({"color":"green"});
+                $('#para').html(`We can give you ${cash}$`);
+                // alert(`${cash}`)
+                // <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/m7FO0p9hTc59e" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/m7FO0p9hTc59e">via GIPHY</a></p>
+                $('.sticker').html(`<div style="width:30%;height:0;padding-bottom:10%;position:relative;"><iframe src="https://giphy.com/embed/m7FO0p9hTc59e" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/m7FO0p9hTc59e">via GIPHY</a></p>`);
+            }
+           });
+
+           alph = Number('a') ;
+           console.log(alph);
+
+
+
 
 
 
