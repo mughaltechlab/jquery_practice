@@ -5,9 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>Jquery Practice</title>
+    <style>
+        /* body{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        } */
+        .line{
+            text-decoration: line-through;
+            color: tomato;
+        }
+        .question{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .question button{
+            display: block;
+            padding: 8px 10px;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lonewolf</h1>
+    <!-- <h1>Lonewolf</h1>
     <h1>Lonewolf</h1>
     <h1>Lonewolf</h1>
     <h1>Lonewolf</h1>
@@ -15,15 +38,136 @@
     <h3>Lonewolf</h3>
     <h4>Lonewolf</h4>
     <h5>Lonewolf</h5>
-    <button class="btn1">Button1</button>
+    <button class="btn1">Button1</button> -->
 
+    <form action="" id="addForm">
+        <input type="text" name="inp" id="inp" placeholder="Add task">
+        <button type="submit">ADD</button>
+    </form>
+
+    <ul id="tasks">
+        <li>Learn Jquery</li>
+        <li>Learn css</li>
+        <li>Learn js</li>
+    </ul>
+    
+    <div class="question">
+        <h1 id="replace">Can You give me 100$</h1>
+        <button class="yBtn">Yes</button>
+        <button class="nBtn">No</button>
+    </div>
 
     <script>
         $(document).ready(()=>{
-            $("h1,h2,h3,h4,h5").css("border-bottom","1px solid red") ;
-            $("h1:eq(3)").css("border-bottom","1px dashed blue");
-            $(".btn1").click(()=>{alert("iftaar time")});
-            // alert("Welcome " + a);
+            $("#addForm").submit((e)=>{
+                e.preventDefault();
+                v = $("#inp").val();
+                // alert("hello"+v);
+                let newTask = `<li id="newTask">${v}</li>`
+                $(newTask).appendTo("#tasks");
+            });
+
+            $("ul").on('click','li',function(){
+                $(this).toggleClass('line');
+                console.log($(this).html());
+            });
+            
+            // newList = $("#newTask").get();
+            // $.map(newList,(el)=>{
+            //     $(el).click(()=>{
+            //         $(el).toggleClass("line");
+            //         console.log($(el));
+            //     });
+            // });
+            
+            // wid = $("body").innerWidth() ;
+            // console.log(wid);
+            // console.log(window.innerWidth);
+            // if (window.innerWidth <= 700) {
+            //     $("body").css("background","black");
+            // }
+
+            
+
+            // $("li").css("background-color","red");
+
+            // a = $("ul li");
+            // $("ul li").map(element => {
+            //     $(element).click((element)=>{
+            //         $(element).css({"text-decoration" : "line-through"});
+            //     });
+            // });
+
+
+            // no btn
+            arr = ['sochlay jani','yaad kr woh din','dekhle beta','yaad kr mene bike di thi tjhe','acha beta auqaat pe aarha h'];
+            i = 0;
+            $(".nBtn").click(()=>{
+                btnSize = $(".yBtn").outerWidth();
+                btnSize += 10
+                $(".yBtn").css({"width":`${btnSize}px`, "height":`${btnSize}px` }) ;
+                if (i < arr.length) {
+                    $(".nBtn").text(arr[i]);
+                    console.log(arr[i]);
+                    i++;
+                }else { i=0 }
+            });
+
+            // yes btn
+            $(".yBtn").click(()=>{
+                // $("#replace").html("<h1>Thank You</h1>").css("color","green");
+                // <div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/VYxJ60DDxVB4K83IX3" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/stickers/dance-axolotl-ajolote-VYxJ60DDxVB4K83IX3">via GIPHY</a></p>
+                $(".question").html(`<div style="width:20%;height:0;padding-bottom:10%;position:relative;"><iframe src="https://giphy.com/embed/VYxJ60DDxVB4K83IX3" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/stickers/dance-axolotl-ajolote-VYxJ60DDxVB4K83IX3">via GIPHY</a></p>`);
+            });
+            
+
+            /**
+             * * EVENTS
+             *  ! mouse events (click(), dblclick(), contextmenu(), mouseenter(), mouseleave())
+             * ? keyboard events (keypress(), keyup(), keydown())
+             * ! form events (focus(), blur(), change(), select(), submit())
+             * * how to get input,radio,select,checkbox value : .val()  ,   how to set input,radio,select,checkbox value : .val("lonewolf")
+             * * how to get tags html : .html()   ,   how to set tags inner html : .html("welcome <b>Lonewolf</b>")
+             * * how to get tags text : .text()   ,   how to set tags text : .text("welcome Lonewolf")
+             * ? window events (scroll(), resize())
+             * ! style multiple css ( .css({ "background":"red", "color":"aqua", "border":"5px solid red" }) )
+             * todo: use multiple events on one element: ------------------------------------------------------
+             *  *                $('#box').on({
+             *  *                        "click" : ()=>{},
+             *  *                        "mouseover" : ()=>{},
+             *  *                        "mouseout" : ()=>{},
+             *  *                })
+             *  todo:------------------------------------------------------------------------------------------
+             *  ? after() , before() , append(), prepend(), appendTo() , prependTo()
+             *  ? clone()
+             *  ? replaceWith(), replaceAll()
+             *  ? wrap() , unwrap(), wrapAll(), wrapInner()
+             * * -------WIDTH----------------------------------------------------------------------------------
+             * ? width()            : only give content width
+             * ? height()           : 
+             * ? innerWidth()       : now give full inner width
+             * ? innerHeight()      : 
+             * ? outerWidth()       : give width with full border 
+             * ? outerHeight()      : 
+             * ? outerWidth(true)   : now give width with count their margin also.
+             * ? outerHeight(true)  : 
+             * * ----------------------------------------------------------------------------------------------
+             * 
+            */
+
+            // $("h1,h2,h3,h4,h5").css("border-bottom","1px solid red") ;
+            // $("h1:eq(3)").css("border-bottom","1px dashed blue");
+            // $(".btn1").click(()=>{alert("iftaar time")});
+            // // alert("Welcome " + a);
+            // $('h2').mouseenter(()=>{
+            //     $('h2').css('color','blue');
+            // });
+            // $('h2').mouseleave(()=>{
+            //     $('h2').css('color','black');
+            // });
+
+
+
             
         })
     </script>
