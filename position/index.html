@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Jquery Position Practice</title>
+    <style>
+        .box{
+            width: 400px;
+            height: 400px;
+            background: #000;
+            position: relative;
+        }
+        .player{
+            width: 20px;
+            height: 20px;
+            background: tomato;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="player"></div>
+    </div>
+
+    <script>
+        $(document).ready(()=>{
+
+            // box
+            box = $(".box").position();
+            box_width = 400;
+            box_height = 400;
+            box_w_start = box.left;
+            box_w_end = box.left + box_width;
+            box_h_start = box.top;
+            box_h_end = box.top + box_height;
+            // player
+            up_down = left_right = false;
+            // moves
+            up = 0;
+            down = 0;
+            left = 0;
+            right = 0;
+            pl = $(".player");
+            // pl = $(".player").offset();
+            // pl.offset({top:10,left:30});
+            
+            // constraints the player movement in the box
+            
+            $(document).keypress((e)=>{
+                console.log('lonewolF');
+                // up = down = right = left = 0;
+
+                // up
+                if (e.key == 's') {
+                    down += 10;
+                    if (down < 400) {
+                        $(pl).offset({top: down});
+                        
+                        console.log($(pl).offset().top);
+                    }
+                }
+            });
+                
+    
+            console.log("player: "+pl.top);
+            console.log("box:"+box_h_end);
+            console.log("bool: "+ left_right);
+        })
+    </script>
+</body>
+</html>
