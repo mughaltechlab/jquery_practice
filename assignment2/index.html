@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form action=""> -->
+        <table class="table">
+            <tr>
+                <th>First name</th>
+                <th> <button class="add">+</button> <button type='submit'>Submit</button:submit> </th>
+            </tr>
+            <tbody class="tableBody">
+                <tr class="bodyTr">
+                    <td> <input type="text" name="fName"  placeholder="First name"> </td>
+                    <td> <button class="minus">-</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    <!-- </form> -->
+
+
+    <script>
+        $(document).ready(()=>{
+            // add row in table body
+            $(".add").click(()=>{
+                $(".tableBody").append(`<tr class="bodyTr">
+                <td> <input type="text" name="fName" placeholder="First name"> </td>
+                <td> <button class="minus">-</button> </td>
+            </tr>`);
+            });
+            // remove row on minus btn
+            // console.log(a);
+            $(".tableBody").on('click','.minus',function(){
+                    // console.log($('.tableBody').children());
+                    rows = $('.tableBody').children().length;
+                    // console.log(rows);
+                    if (rows > 1) {
+                        // console.log(11);
+                        this_tr = $(this).parent().parent();
+                        $(this_tr).remove();
+                    }else{
+                        alert("you can't delete this row");
+                    }
+            });
+
+
+
+            // console.log(document.querySelectorAll('.minus'));
+            //  $('.tableBody').on('click','.minus',()=>{
+            //     console.log(11);
+            //         this_tr = $(this).closest('.bodyTr');
+            //         console.log(this_tr.html());
+            //         // $(this_tr).remove();
+            // });
+
+        })
+    </script>
+</body>
+</html>
